@@ -89,6 +89,7 @@
       thisProduct.formInputs = thisProduct.form.querySelectorAll(select.all.formInputs);
       thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
       thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
+      thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
     }
 
     initAccordion() {
@@ -148,27 +149,38 @@
       for(let paramId in thisProduct.data.params) {
         // determine param value, e.g. paramId = 'toppings', param = { label: 'Toppings', type: 'checkboxes'... }
         const param = thisProduct.data.params[paramId];
-        console.log(paramId, param);
 
         // for every option in this category
         for(let optionId in param.options) {
           // determine option value, e.g. optionId = 'olives', option = { label: 'Olives', price: 2, default: true }
           const option = param.options[optionId];
-          console.log(optionId, option);
+
+          const optionSelected = formData[paramId] && formData[paramId].includes(optionId);
 
           // check if there is param with a name of paramId in formData and if it includes optionId
-          if (formData[paramId] && formData[paramId].includes(optionId)) {
+          if (optionSelected) {
 
             // check if the option is not default
             if (option.default != true) {
+
               // add option price to price variable
               price += option.price;
             }
-          } else {
-            // check if the option if default
-            if (option.default == true) {
-              // deduct option price from a price variable
-              price -= option.price;
+            // check if the option is default
+          } else if (option.default == true) {
+
+            // deduct option price from a price variable
+            price -= option.price;
+          }
+
+          // find img with class paramId-optionId in img wrapper
+          const optionImg = thisProduct.imageWrapper.querySelector('.' + paramId + '-' + optionId);
+
+          if (optionImg) {
+            if (optionSelected) {
+              optionImg.classList.add(classNames.menuProduct.imageVisible);
+            } else {
+              optionImg.classList.remove(classNames.menuProduct.imageVisible);
             }
           }
         }
