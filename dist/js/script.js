@@ -60,7 +60,6 @@
 
       thisProduct.renderInMenu();
       thisProduct.initAccordion();
-      console.log('new Product: ', thisProduct);
     }
 
     renderInMenu(){
