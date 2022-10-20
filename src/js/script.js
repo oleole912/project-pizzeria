@@ -198,7 +198,6 @@
       const thisProduct = this;
 
       thisProduct.amountWidget = new AmountWidget(thisProduct.amountWidgetElem);
-      console.log(thisProduct.amountWidget);
       thisProduct.amountWidgetElem.addEventListener('updated', function (){
         thisProduct.processOrder();
       });
@@ -229,6 +228,9 @@
       const thisWidget = this;
 
       const newValue = parseInt(value);
+
+      // set default value to input
+      thisWidget.value = settings.amountWidget.defaultValue;
 
       /* TODO: Add validation */
 
@@ -263,7 +265,7 @@
     announce(){
       const thisWidget = this;
 
-      const event = new Event ('updated!');
+      const event = new Event ('updated');
       thisWidget.element.dispatchEvent(event);
     }
   }
