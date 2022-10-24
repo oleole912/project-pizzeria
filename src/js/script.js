@@ -298,11 +298,8 @@
     constructor(element) {
       const thisWidget = this;
       thisWidget.getElements(element);
-      thisWidget.setValue(thisWidget.input.value);
+      thisWidget.setValue(settings.amountWidget.defaultValue);
       thisWidget.initActions();
-
-      //console.log('AmountWidget (thisWidget): ', thisWidget);
-      //console.log('widgets constructor arguments: ', element);
     }
 
     getElements(element){
@@ -318,9 +315,6 @@
       const thisWidget = this;
 
       const newValue = parseInt(value);
-
-      // set default value to thisWidget.value
-      thisWidget.value = settings.amountWidget.defaultValue;
 
       /* TODO: Add validation */
 
@@ -348,12 +342,7 @@
 
       thisWidget.linkIncrease.addEventListener('click', function (event) {
         event.preventDefault();
-        if(thisWidget.value < settings.amountWidget.defaultMax){
-          thisWidget.setValue(thisWidget.value + 1);
-        }
-        thisWidget.setValue(thisWidget.value);
-
-
+        thisWidget.setValue(thisWidget.value + 1);
       });
     }
 
@@ -501,13 +490,13 @@
         body: JSON.stringify(payload),
       };
 
-      fetch(url, options);
-      /* .then(function(response){
-        return response.json();
-      })
-      .then(function(parsedResponse){
-        console.log('parsedResponse: ', parsedResponse);
-      }); */
+      fetch(url, options)
+        .then(function(response){
+          return response.json();
+        })
+        .then(function(parsedResponse){
+          console.log('parsedResponse: ', parsedResponse);
+        });
     }
   }
 
