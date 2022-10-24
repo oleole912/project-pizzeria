@@ -319,7 +319,7 @@
 
       const newValue = parseInt(value);
 
-      // set default value to input
+      // set default value to thisWidget.value
       thisWidget.value = settings.amountWidget.defaultValue;
 
       /* TODO: Add validation */
@@ -348,7 +348,12 @@
 
       thisWidget.linkIncrease.addEventListener('click', function (event) {
         event.preventDefault();
-        thisWidget.setValue(thisWidget.value + 1);
+        if(thisWidget.value < settings.amountWidget.defaultMax){
+          thisWidget.setValue(thisWidget.value + 1);
+        }
+        thisWidget.setValue(thisWidget.value);
+
+
       });
     }
 
