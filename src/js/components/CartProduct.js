@@ -3,12 +3,12 @@ import AmountWidget from './AmountWidget.js';
 
 class CartProduct {
   constructor(menuProduct, element) {
-    const  thisCartProduct = this;
+    const thisCartProduct = this;
 
     thisCartProduct.id = menuProduct.id;
     thisCartProduct.name = menuProduct.name;
     thisCartProduct.amount = menuProduct.amount;
-    thisCartProduct.priseSingle = menuProduct.priceSingle;
+    thisCartProduct.priceSingle = menuProduct.priceSingle;
     thisCartProduct.price = menuProduct.price;
     thisCartProduct.params = menuProduct.params;
 
@@ -35,7 +35,7 @@ class CartProduct {
     thisCartProduct.amountWidget = new AmountWidget(thisCartProduct.dom.amountWidget);
     thisCartProduct.dom.amountWidget.addEventListener('updated', function (){
       thisCartProduct.amount = thisCartProduct.amountWidget.value;
-      thisCartProduct.price = thisCartProduct.priseSingle * thisCartProduct.amount;
+      thisCartProduct.price = thisCartProduct.priceSingle * thisCartProduct.amount;
       thisCartProduct.dom.price.innerHTML = thisCartProduct.price;
     });
   }
@@ -74,7 +74,7 @@ class CartProduct {
       id: thisCartProduct.id,
       name: thisCartProduct.name,
       amount: thisCartProduct.amount,
-      priceSingle: thisCartProduct.priseSingle,
+      priceSingle: thisCartProduct.priceSingle,
       price: thisCartProduct.price,
       params: thisCartProduct.params,
     };

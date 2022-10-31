@@ -43,8 +43,9 @@ const app = {
 
     thisApp.productList = document.querySelector(select.containerOf.menu);
 
-    thisApp.productList.addEventListener('add-to-cart', function(){
+    thisApp.productList.addEventListener('add-to-cart', function(event){
       app.cart.add(event.detail.product);
+      console.log('event: ', event);
     });
   },
 
