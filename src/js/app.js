@@ -45,7 +45,6 @@ const app = {
 
     thisApp.productList.addEventListener('add-to-cart', function(event){
       app.cart.add(event.detail.product);
-      console.log('event: ', event);
     });
   },
 
