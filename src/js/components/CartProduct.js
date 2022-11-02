@@ -32,7 +32,7 @@ class CartProduct {
   initAmountWidget(){
     const thisCartProduct = this;
 
-    thisCartProduct.amountWidget = new AmountWidget(thisCartProduct.dom.amountWidget);
+    thisCartProduct.amountWidget = new AmountWidget(thisCartProduct.dom.amountWidget, thisCartProduct.amount);
     //console.log('value: ', thisCartProduct.amountWidget.value);
 
     thisCartProduct.dom.amountWidget.addEventListener('updated', function (){
