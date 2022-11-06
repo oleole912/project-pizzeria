@@ -13,7 +13,6 @@ class Booking {
     thisBooking.render(element);
     thisBooking.initWidgets();
     thisBooking.selectedTable;
-
     thisBooking.getData();
 
   }
@@ -63,9 +62,6 @@ class Booking {
         ]);
       })
       .then(function([bookings, eventsCurrent, eventsRepeat]){
-        //console.log('bookings: ', bookings);
-        //console.log('eventsCurrent: ', eventsCurrent);
-        //console.log('eventsRepeat: ', eventsRepeat);
         thisBooking.parseData(bookings, eventsCurrent, eventsRepeat);
       });
   }
@@ -173,7 +169,7 @@ class Booking {
     thisBooking.dom.submit = thisBooking.dom.wrapper.querySelector(select.booking.form);
     thisBooking.dom.phone = thisBooking.dom.wrapper.querySelector(select.booking.phone);
     thisBooking.dom.address = thisBooking.dom.wrapper.querySelector(select.booking.address);
-    thisBooking.dom.starters = thisBooking.dom.wrapper.querySelector(select.booking.starters);
+    thisBooking.dom.starters = thisBooking.dom.wrapper.querySelectorAll(select.booking.starters);
 
   }
 
@@ -237,7 +233,6 @@ class Booking {
           }
           clickedElem.classList.add(classNames.booking.tableSelected);
           thisBooking.selectedTable = tableId;
-          console.log('selected table: ',thisBooking.selectedTable);
         }
       }
     }
@@ -245,37 +240,25 @@ class Booking {
 
   sendBooking() {
     const thisBooking = this;
-    thisBooking.starters = [];
 
     const url = settings.db.url + '/' + settings.db.bookings;
-
-    thisBooking.dom.starters.addEventListener('click', function(event) {
-
-      const clickedStarter = event.target;
-      console.log('clicked starter', clickedStarter);
-      const index = thisBooking.starters.indexOf(clickedStarter.value);
-
-      if (clickedStarter.tagName == 'INPUT' && clickedStarter.name == 'starter' && clickedStarter.type == 'checkbox') {
-        if (clickedStarter.checked) {
-          thisBooking.starters.push(clickedStarter.value);
-          console.log('added', clickedStarter.value);
-        } else {
-          thisBooking.starters.splice(index, 1);
-        }
-      }
-    });
 
     const payload = {
       date: thisBooking.datePicker.value,
       hour: thisBooking.hourPicker.value,
       people: parseInt(thisBooking.peopleAmountWidget.value),
       duration: parseInt(thisBooking.hoursAmountWidget.value),
-      starters: thisBooking.starters,
+      starters: [],
       table: parseInt(thisBooking.selectedTable),
       phone: thisBooking.dom.phone.value,
       address: thisBooking.dom.address.value
     };
 
+    for (let starter of thisBooking.dom.starters) {
+      if (starter.checked) {
+        payload.starters.push(starter.value);
+      }
+    }
 
     const options = {
       method: 'POST',
