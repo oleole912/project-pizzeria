@@ -109,6 +109,8 @@ class Booking {
       }
       thisBooking.booked[date][hourBlock].push(table);
     }
+    thisBooking.updateDOM();
+
   }
 
   updateDOM(){
@@ -139,6 +141,7 @@ class Booking {
         thisBooking.booked[thisBooking.date][thisBooking.hour].includes(tableId)
       ) {
         table.classList.add(classNames.booking.tableBooked);
+        table.classList.remove(classNames.booking.tableSelected);
       } else {
         table.classList.remove(classNames.booking.tableBooked);
       }
@@ -196,9 +199,9 @@ class Booking {
     });
 
     thisBooking.dom.wrapper.addEventListener('updated', function() {
-      for (let table of thisBooking.dom.tables) {
+      /*for (let table of thisBooking.dom.tables) {
         table.classList.remove(classNames.booking.tableSelected);
-      }
+      }*/
       thisBooking.updateDOM();
     });
 
@@ -275,6 +278,7 @@ class Booking {
       .then(function(booking) {
         console.log('booking: ', booking);
         thisBooking.makeBooked(payload.date, payload.hour, payload.duration, payload.table);
+        alert('Table booked successfully!');
       });
   }
 }
