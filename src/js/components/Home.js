@@ -1,10 +1,11 @@
-import { templates } from '../settings.js';
+import { select, templates } from '../settings.js';
 
 class Home {
   constructor(element) {
     const thisHome = this;
 
     thisHome.render(element);
+    thisHome.initCarousel();
   }
 
   render(element) {
@@ -21,6 +22,18 @@ class Home {
 
     // add innerHTML of the wrapper using generatedHTML
     thisHome.dom.wrapper.innerHTML = generatedHTML;
+
+    thisHome.dom.carousel = thisHome.dom.wrapper.querySelector(select.home.carousel);
+  }
+
+  initCarousel() {
+    const thisHome = this;
+
+    new Flickity (thisHome.dom.carousel, { // eslint-disable-line
+      contain: true,
+      autoPlay: true
+    });
+
   }
 }
 

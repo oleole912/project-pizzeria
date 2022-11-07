@@ -74,6 +74,7 @@ export const select = {
   },
   home : {
     links: '.link-btn',
+    carousel: '.main-carousel',
   }
 };
 
