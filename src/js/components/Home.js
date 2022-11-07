@@ -29,7 +29,7 @@ class Home {
   initCarousel() {
     const thisHome = this;
 
-    new Flickity (thisHome.dom.carousel, { // eslint-disable-line
+    thisHome.carousel = new Flickity (thisHome.dom.carousel, { // eslint-disable-line
       contain: true,
       autoPlay: true
     });

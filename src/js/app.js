@@ -85,6 +85,10 @@ const app = {
         link.getAttribute('href') == '#' + pageId
       );
     }
+
+    if(pageId === 'home') {
+      thisApp.homePage.carousel.resize();
+    }
   },
 
   initMenu: function() {
@@ -135,11 +139,11 @@ const app = {
   init: function(){
     const thisApp = this;
 
-    thisApp.initPages();
     thisApp.initData();
     thisApp.initCart();
     thisApp.initBooking();
     thisApp.initHome();
+    thisApp.initPages();
   },
 };
 
