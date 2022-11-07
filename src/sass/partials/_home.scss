@@ -140,6 +140,7 @@
       &__icons i {
         margin: 5px;
         font-size: 0px;
+        transition: all 0.3s ease-in;
       }
 
       &__icons i:hover {
@@ -165,7 +166,6 @@
   &__image i {
     color: $color-main;
     font-weight: 900;
-    font-size: 24px;
   }
 }
 
